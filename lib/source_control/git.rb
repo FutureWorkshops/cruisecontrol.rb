@@ -2,7 +2,7 @@ module SourceControl
 
   class Git < AbstractAdapter
 
-    attr_accessor :repository
+    attr_accessor :repository, :branch
 
     def initialize(options)
       options = options.dup

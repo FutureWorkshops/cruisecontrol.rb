@@ -3,8 +3,9 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
+  before_filter :check_remove_menu
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  
+
   def render_not_found
     render :file => Rails.root.join('public', '404.html').to_s, :status => 404
   end
@@ -13,4 +14,9 @@ class ApplicationController < ActionController::Base
     return unless Configuration.disable_admin_ui
     render :text => 'Build requests are not allowed', :status => :forbidden
   end
+
+  def check_remove_menu
+    @show_main_menu = params[:ci_display_layout] ? false : true
+  end
+
 end
